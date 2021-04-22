@@ -1,0 +1,27 @@
+version: '3.8'
+
+x-dev:
+  &proxy_conf
+  http_proxy: "${HTTP_PROXY}"
+  https_proxy: "${HTTPS_PROXY}"
+
+services:
+  app:
+    container_name: ${APP_NAME-sortatorul}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args: *proxy_conf
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      http_proxy: "${HTTP_PROXY}"
+      https_proxy: "${HTTPS_PROXY}"
+    image: ${APP_NAME-sortatorul}
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - 3090:3090
+      - 9000:9000
+    restart: always
+    # command: tail -f /dev/null
