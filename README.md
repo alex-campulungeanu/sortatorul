@@ -48,3 +48,7 @@ https://github.com/bradtraversy/vue-crash-2021
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) page for details.
+
+## TODO
+[] add a popup with all replys to a comment(if it's a reply show the parent)
+[] add a loading on page load and on post select from the list
