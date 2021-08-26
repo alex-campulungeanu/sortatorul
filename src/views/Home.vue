@@ -80,7 +80,7 @@ export default {
       comments: [],
       posts: [],
       currentPost: '',
-      isManual: true
+      isManual: false
     }
   },
   async created() {
