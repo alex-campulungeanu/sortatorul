@@ -17,11 +17,40 @@
     />
   </div>
   <div class="grid justify-center m-10">
-    <div> <span class="font-bold"> CURRENT POST => </span> {{this.currentPost}}</div>
-    <hr class="h-5"/>
+    <div> 
+      <span class="font-bold"> CURRENT POST : </span> {{this.currentPost}}
+    </div>
+    <hr class="h-6"/>
     <Posts 
-      :posts = "posts"
+      :posts="posts"
       @set-current-post="setCurrentPost"
+      :isManual="isManual"
+    />
+    <div class="m-2">
+      <input
+        type="checkbox" 
+        v-model="isManual"
+        @input="currentPost=''"
+      >
+      <span class="ml-1">Enter URL manualy</span>
+    </div>
+    <div 
+      class=""
+      v-if="isManual"
+    >
+      <input
+        type="text" 
+        class="border-2 outline-none w-full"
+        v-model="currentPost"
+        @input="setCurrentPost"
+      >
+    </div>
+    <br>
+    <Button
+      v-if="currentPost != ''"
+      :text="'Go'"
+      :color="'#990033'"
+      @btn-click="fetchComments()"
     />
   </div>
   <Comments
@@ -50,28 +79,28 @@ export default {
     return {
       comments: [],
       posts: [],
-      currentPost: ''
+      currentPost: '',
+      isManual: true
     }
   },
   async created() {
     try {
       this.posts = await this.fetchPosts()
-      let lastPost = this.posts[0].url
-      this.currentPost = lastPost
-      this.comments = await this.fetchComments(lastPost)
     } catch (error) {
-      console.log(error)
+      console.log(error) //TODO: change this with a popper
     }
   },
   methods: {
-    async fetchComments(url) {
-      let currentPost = url
-      let {data: comments} = await axios.get(`${SERVER_API_BASE_URL}/comments?url=${currentPost}`)
+    onCheckManual() {
+      console.log('Change manual')
+    },
+    async fetchComments() {
+      let {data: comments} = await axios.get(`${SERVER_API_BASE_URL}/comments?url=${this.currentPost}`)
       if (comments.success) {
         comments.data.sort(sortJsonByProperty('up'))
-        return comments.data
+        this.comments = comments.data
       } else {
-        return [{}]
+        this.comments = [{}]
       }
     },
     async fetchPosts() {
@@ -87,9 +116,8 @@ export default {
     sortDown() {
       this.comments.sort(sortJsonByProperty('down'))
     },
-    async setCurrentPost(currentPost) {
-      this.currentPost = currentPost
-      this.comments = await this.fetchComments(currentPost)
+    async setCurrentPost(event) {
+      this.currentPost = event.target.value
     },
   },
 }
