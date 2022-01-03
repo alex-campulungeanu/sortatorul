@@ -11,7 +11,8 @@ module.exports = {
   ],
   rules: {
     // override/add rules settings here, such as:
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    'vue/no-unused-components': 'off'
   },
   parser: "vue-eslint-parser",
   // parserOptions: {
