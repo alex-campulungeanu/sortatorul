@@ -53,6 +53,9 @@
       @btn-click="fetchComments()"
     />
   </div>
+  <PostContent 
+    :content="postContent"
+  />
   <Comments
     :comments="comments"
   />
@@ -62,6 +65,7 @@
 import axios from 'axios'
 import Posts from '../components/Posts.vue'
 import Comments from '../components/Comments.vue'
+import PostContent from '../components/PostContent.vue'
 import Button from '../components/Button.vue'
 import {SERVER_API_BASE_URL} from '../config/constants'
 import {sortJsonByProperty} from '../config/utils'
@@ -71,7 +75,8 @@ export default {
   components:{ 
     Posts,
     Comments,
-    Button
+    Button,
+    PostContent
   },
   props: {
   },
@@ -80,6 +85,7 @@ export default {
       comments: [],
       posts: [],
       currentPost: '',
+      postDetail: '',
       isManual: false
     }
   },
@@ -102,6 +108,7 @@ export default {
       } else {
         this.comments = [{}]
       }
+      this.postContent = 'some details of the content some detailsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contents of the contentsome details of the contentsome details of the contentsome details of the content'
     },
     async fetchPosts() {
       let {data} = await axios.get(`${SERVER_API_BASE_URL}/posts`)

@@ -42,7 +42,7 @@ export default {
     color: red;
   }
   .comment {
-    margin: 5px;
+    margin: 5px 15px;
     padding: 10px 20px;
     cursor: pointer;
     border-left: 5px solid green;

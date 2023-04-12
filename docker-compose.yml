@@ -7,21 +7,22 @@ x-dev:
 
 services:
   app:
-    container_name: ${APP_NAME-sortatorul}
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args: *proxy_conf
+    container_name: sortatorul
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    #   args: *proxy_conf
     environment:
-      CHOKIDAR_USEPOLLING: "true"
+      # CHOKIDAR_USEPOLLING: "true"
       http_proxy: "${HTTP_PROXY}"
       https_proxy: "${HTTPS_PROXY}"
-    image: ${APP_NAME-sortatorul}
+    image: node:14
     volumes:
       - ./:/app
       - /app/node_modules
     ports:
       - 3090:3090
       - 9000:9000
+    working_dir: /app
     restart: always
-    # command: tail -f /dev/null
+    command: tail -f /dev/null
