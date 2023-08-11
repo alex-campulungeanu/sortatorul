@@ -108,6 +108,8 @@ export default {
       } else {
         this.comments = [{}]
       }
+    },
+    async fetchPostContent() {
       this.postContent = 'some details of the content some detailsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contents of the contentsome details of the contentsome details of the contentsome details of the content'
     },
     async fetchPosts() {

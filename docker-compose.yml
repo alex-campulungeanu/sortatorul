@@ -16,7 +16,7 @@ services:
       # CHOKIDAR_USEPOLLING: "true"
       http_proxy: "${HTTP_PROXY}"
       https_proxy: "${HTTPS_PROXY}"
-    image: node:14
+    image: node:16
     volumes:
       - ./:/app
       - /app/node_modules

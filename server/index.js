@@ -1,12 +1,8 @@
 const os = require("os");
 const express = require('express')
 const cors = require('cors')
-const cheerio = require('cheerio')
 const morgan = require('morgan')
-const fs = require('fs')
-const path = require('path');
 
-const {fetchHtml} = require('./utils/scrap')
 const morganMiddleware = require('./middlewares/morgan-middleware')
 const apiRouter = require('./routes')
 
