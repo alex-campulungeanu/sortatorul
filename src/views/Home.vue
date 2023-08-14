@@ -50,11 +50,12 @@
       v-if="currentPost != ''"
       :text="'Go'"
       :color="'#990033'"
-      @btn-click="fetchComments()"
+      @btn-click="fetchPostDetails()"
     />
   </div>
   <PostContent 
     :content="postContent"
+    :title="postTitle"
   />
   <Comments
     :comments="comments"
@@ -86,6 +87,7 @@ export default {
       posts: [],
       currentPost: '',
       postDetail: '',
+      postTitle: '',
       isManual: false
     }
   },
@@ -100,17 +102,18 @@ export default {
     onCheckManual() {
       console.log('Change manual')
     },
-    async fetchComments() {
-      let {data: comments} = await axios.get(`${SERVER_API_BASE_URL}/comments?url=${this.currentPost}`)
-      if (comments.success) {
-        comments.data.sort(sortJsonByProperty('up'))
-        this.comments = comments.data
+    async fetchPostDetails() {
+      let response = await axios.get(`${SERVER_API_BASE_URL}/post-details?url=${this.currentPost}`), {data: details} = response
+      if (response.status == 200) {
+        details.data.comments.sort(sortJsonByProperty('up'))
+        this.comments = details.data.comments
+        this.postContent = details.data.content
+        this.postTitle = details.data.title
       } else {
+        // TODO: add here a notification system with an error on the page
         this.comments = [{}]
+        this.postContent = ''
       }
-    },
-    async fetchPostContent() {
-      this.postContent = 'some details of the content some detailsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contentsome details of the contents of the contentsome details of the contentsome details of the contentsome details of the content'
     },
     async fetchPosts() {
       let {data} = await axios.get(`${SERVER_API_BASE_URL}/posts`)

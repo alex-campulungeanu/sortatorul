@@ -1,32 +1,23 @@
-const cheerio = require('cheerio')
-
-const {axiosService} = require('../src/services/axiosService')
+const {fetchHtml} = require('../lambda_utils/common')
+const { headers } = require('../lambda_utils/constants')
 
 module.exports.handler = async (event) => {
-  // TODO: ar trebui sa pun asta intr-o constanta, este folosita in mai multe locuri
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
-  };
-
   const url = event.queryStringParameters.url
 
-  const fetchHtml = async (url) => {
-    const {data} = await axiosService(url, {
-      method: 'GET',
-    })
-    return cheerio.load(data)
-  }
-
-  const getComments = async (url) => {
+  const getDetails = async (url) => {
     let commentsList = []
+    let postContent = ''
+    let postTitle = ''
     let $
     try {
       $ = await fetchHtml(url)
     } catch (error) {
+      // TODO: raise here an error and send the response with the error
       console.log(`[+] fetch comments error: ${error.message}`)
     }
+
+    postTitle = $('h1.post-title').text()
+    postContent = $('div.post-content').text()
     const comments = $('ol.commentlist > li')
     comments.each((idx, el) => {
       // let childsList = []
@@ -68,12 +59,16 @@ module.exports.handler = async (event) => {
         commentsList.push(childObj)
       })
     })
-    return commentsList
+    return {
+      comments: commentsList,
+      content: postContent,
+      title: postTitle
+    }
   }
   
   try {
     if (url) {
-      let comms = await getComments(url)
+      let comms = await getDetails(url)
       return {
         headers,
         statusCode: 200,
