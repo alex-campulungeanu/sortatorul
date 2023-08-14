@@ -17,7 +17,7 @@ module.exports.handler = async (event) => {
     }
 
     postTitle = $('h1.post-title').text()
-    postContent = $('div.post-content').text()
+    postContent = $('div.post-content').html()
     const comments = $('ol.commentlist > li')
     comments.each((idx, el) => {
       // let childsList = []

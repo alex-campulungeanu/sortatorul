@@ -51,7 +51,7 @@ This project is licensed under the MIT License - see the [LICENSE](https://opens
 
 ## TODO
 
-[ ] the response from lambda is a JSON but is treated as text, why ?
+[x] the response from lambda is a JSON but is treated as text, why ?
 [ ] add a notification systems / alert
 [ ] add a popup with all replys to a comment(if it's a reply show the parent)
 [ ] add a loading on page load and on post select from the list

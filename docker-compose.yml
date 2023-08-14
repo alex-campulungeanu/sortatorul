@@ -13,7 +13,7 @@ services:
     #   dockerfile: Dockerfile
     #   args: *proxy_conf
     environment:
-      # CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_USEPOLLING: "true" # needed for hot reload
       http_proxy: "${HTTP_PROXY}"
       https_proxy: "${HTTPS_PROXY}"
     image: node:16

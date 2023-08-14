@@ -2,8 +2,7 @@
   <div class="post-title">
     {{ title  }}
   </div>
-  <div class="content-container" v-show="content !== undefined">
-    {{ content }}    
+  <div class="content-container" v-show="content !== undefined" v-html="content">
   </div>
 </template>
 
@@ -27,7 +26,6 @@ export default {
   .content-container {
     margin: 25px;
     padding: 10px 20px;
-    cursor: pointer;
     border: 5px solid blue;
     border-bottom: 1px solid #ddd;
     border-radius: 10px;
