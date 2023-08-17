@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import NProgress from 'nprogress'
 import About from '../views/About.vue'
 import Home from '../views/Home.vue'
+import Test from '../views/Test.vue'
 import MainLayout from '../layouts/MainLayout.vue'
 
 const routes = [
@@ -23,6 +24,10 @@ const routes = [
       {
         path: 'about',
         component: About
+      },
+      {
+        path: 'test',
+        component: Test
       }
     ]
   },

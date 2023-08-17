@@ -1,8 +1,9 @@
 <template>
   <button
-    :style="{background: color}"
+    :style="{background: conditionalColor}"
     class="btn"
     @click="onClick()"
+    :disabled="!isActive"
   >
     {{ text }}
   </button>
@@ -13,7 +14,20 @@ export default {
   name: 'Button',
   props: {
     text: String,
-    color: String
+    color: String,
+    isActive: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    conditionalColor: function() {
+      if (this.isActive) {
+        return this.color
+      } else {
+        return '#808080'
+      }
+    }
   },
   methods: {
     onClick() {

@@ -17,7 +17,7 @@ export default {
   methods: {
   },
   mounted() {
-    console.log(`the component is now mounted`)
+    // console.log(`the component is now mounted`)
   }
 }
 </script>

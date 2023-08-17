@@ -50,7 +50,8 @@ https://github.com/bradtraversy/vue-crash-2021
 This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) page for details.
 
 ## TODO
-
+[ ] manual url box should be disabled when loading for posts
+[ ] treat axios 500 with interceptors https://dev.to/mperon/axios-error-handling-like-a-boss-333d
 [x] the response from lambda is a JSON but is treated as text, why ?
 [ ] add a notification systems / alert
 [ ] add a popup with all replys to a comment(if it's a reply show the parent)

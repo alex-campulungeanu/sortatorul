@@ -5,6 +5,7 @@ module.exports.handler = async (event) => {
   const url = event.queryStringParameters.url
 
   const getDetails = async (url) => {
+    // TODO: create a function in lambda utils to validate the url (proper with zoso.ro validation)
     let commentsList = []
     let postContent = ''
     let postTitle = ''
@@ -80,7 +81,7 @@ module.exports.handler = async (event) => {
     } else {
       return {
         headers,
-        statusCode: 500,
+        statusCode: 400,
         body: JSON.stringify({
           success: false,
           data: 'Post URL is missing'
