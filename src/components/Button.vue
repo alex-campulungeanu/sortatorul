@@ -25,7 +25,7 @@ export default {
       if (this.isActive) {
         return this.color
       } else {
-        return '#808080'
+        return '#E5E4E2'
       }
     }
   },

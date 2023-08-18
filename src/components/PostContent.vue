@@ -1,8 +1,12 @@
 <template>
-  <div class="post-title">
+  <div class="post-title pt-8 text-base font-semibold leading-7">
     {{ title  }}
   </div>
-  <div class="content-container" v-show="content !== undefined" v-html="content">
+  <div 
+    class="content-container space-y-6 py-8 text-base leading-7 text-gray-600" 
+    v-show="content !== undefined" 
+    v-html="content"
+  >
   </div>
 </template>
 

@@ -10,8 +10,8 @@
       <span class="font-bold"> CURRENT POST : </span> {{this.currentPost}}
     </div>
     <hr class="h-6"/>
-    <div class="flex flex-col content-between">
-      <div class="m-2">
+    <div class="flex flex-col content-between mb-6">
+      <div>
         <input type="checkbox" v-model="isManual" @input="currentPost=''" >
         <span class="ml-1">Manual URL</span>
       </div>
@@ -29,8 +29,13 @@
         </div>
       </div>
     </div>
-    <br>
-    <Button :isActive="currentPost !== ''" :text="'Go'" :color="'#990033'" @btn-click="fetchPostDetails()" />
+    <Button 
+      :isActive="currentPost !== ''" 
+      :text="'Go'" 
+      :color="'#990033'" 
+      @btn-click="fetchPostDetails()"
+      class="max-w-2xl"
+    />
   </div>
   
   <PostContent :content="postContent" :title="postTitle" />
@@ -48,11 +53,7 @@ import {SERVER_API_BASE_URL} from '../config/constants'
 import {sortJsonByProperty} from '../config/utils'
 import LoadingIndicator from '../components/LoadingIndicator.vue'
 import axiosInstance from '../libs/axios-instance'
-import {ref, onMounted} from 'vue'
-const el = ref()
-onMounted(() => {
-    el.value
-  })
+ 
 export default {
   name: 'Home',
   components:{ 
@@ -72,7 +73,7 @@ export default {
       currentPost: '',
       postDetail: '',
       postTitle: '',
-      isManual: true,
+      isManual: false,
       isLoading: false,
     }
   },
