@@ -16,8 +16,10 @@
         <span class="ml-1">Manual URL</span>
       </div>
       <div class="max-w-2xl">
-        <div v-if="isLoading">
-          <LoadingIndicator />
+        <div v-if="isLoadingPosts">
+          <div class="flex justify-center items-center">
+            <LoadingIndicator />
+          </div>
         </div>
         <div v-else>
           <div v-if="!isManual">
@@ -38,8 +40,15 @@
     />
   </div>
   
-  <PostContent :content="postContent" :title="postTitle" />
-  <Comments :comments="comments" />
+  <div v-if="isLoadingComments">
+    <div class="flex justify-center items-center">
+      <LoadingIndicator />
+    </div>
+  </div>
+  <div v-else>
+    <PostContent :content="postContent" :title="postTitle" />
+    <Comments :comments="comments" />
+  </div>
 </template>
 
 <script>
@@ -74,14 +83,15 @@ export default {
       postDetail: '',
       postTitle: '',
       isManual: false,
-      isLoading: false,
+      isLoadingPosts: false,
+      isLoadingComments: false,
     }
   },
   async created() {
     try {
-      this.isLoading = true
+      this.isLoadingPosts = true
       this.posts = await this.fetchPosts()
-      this.isLoading = false
+      this.isLoadingPosts = false
     } catch (error) {
       console.log(error) //TODO: change this with a popper
     }
@@ -91,8 +101,8 @@ export default {
       console.log('Change manual')
     },
     async fetchPostDetails() {
+      this.isLoadingComments = true
       let response = await axiosInstance.get(`${SERVER_API_BASE_URL}/post-details?url=${this.currentPost}`)
-      console.log('response', response)
       if (response.status == 200) {
         const {data: details} = response
         details.data.comments.sort(sortJsonByProperty('up'))
@@ -104,6 +114,7 @@ export default {
         this.comments = [{}]
         this.postContent = ''
       }
+      this.isLoadingComments = false
     },
     async fetchPosts() {
       let {data} = await axios.get(`${SERVER_API_BASE_URL}/posts`)

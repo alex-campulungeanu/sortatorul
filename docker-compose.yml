@@ -16,7 +16,7 @@ services:
       CHOKIDAR_USEPOLLING: "true" # needed for hot reload
       http_proxy: "${HTTP_PROXY}"
       https_proxy: "${HTTPS_PROXY}"
-    image: node:16
+    image: node:14 # the packages works only with this version . straaaaaingi !
     volumes:
       - ./:/app
       - /app/node_modules
