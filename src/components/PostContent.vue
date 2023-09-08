@@ -30,9 +30,10 @@ export default {
   .content-container {
     margin: 25px;
     padding: 10px 20px;
-    border: 5px solid blue;
+    border: 5px solid rgb(223, 223, 236);
     border-bottom: 1px solid #ddd;
     border-radius: 10px;
+    background: #e2e8eb;
   }
   .post-title {
     padding: 10px 20px;

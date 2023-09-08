@@ -48,9 +48,10 @@ export default {
     border-left: 5px solid green;
     border-bottom: 1px solid #ddd;
     border-radius: 10px;
+    background: #e4e8eb;
   }
   .comment.children {
-    background: #F5F8FA;
+    background: #fafbfc;
     margin-left: 3rem;
     border-left: 0;
     border-bottom: 1px solid #ddd;

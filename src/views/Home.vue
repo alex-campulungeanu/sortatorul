@@ -7,7 +7,7 @@
 
   <div class="flex flex-col m-10">
     <div class="mb-3"> 
-      <span class="font-bold"> CURRENT POST : </span> {{this.currentPost}}
+      <span class="font-bold"> CURRENT POST : </span> {{this.currentPost}} # {{ this.comments.length }} comments
     </div>
     <hr class="h-6"/>
     <div class="flex flex-col content-between mb-6">
